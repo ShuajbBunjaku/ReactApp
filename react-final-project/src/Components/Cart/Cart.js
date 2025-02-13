@@ -9,18 +9,18 @@ function Cart() {
       const shoppingCart = localStorage.getItem("shoppingCart");
       const parsedProducts = shoppingCart ? JSON.parse(shoppingCart) : [];
 
-      if (!Array.isArray(parsedProducts)) return; // Ensure it's an array
+      if (!Array.isArray(parsedProducts)) return; 
 
       setProducts(parsedProducts);
 
       const calculatedTotal = parsedProducts.reduce(
-        (sum, product) => sum + (product.price || 0), // Ensure price exists
+        (sum, product) => sum + (product.price || 0),
         0
       );
       setTotal(calculatedTotal);
     }
 
-    updateCart(); // Run initially
+    updateCart(); 
 
     window.addEventListener("storage", updateCart);
     return () => window.removeEventListener("storage", updateCart);

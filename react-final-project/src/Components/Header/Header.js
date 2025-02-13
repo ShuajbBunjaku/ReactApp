@@ -2,18 +2,12 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 
 function Header() {
-  // const [arrayLength, setArrayLength] = useState(0);
-  // const [arrayFromStorage, setArrayFromStorage] = useState([]);
+  const [arrayLength, setArrayLength] = useState(0);
+  const [arrayFromStorage, setArrayFromStorage] = useState([]);
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setArrayFromStorage(JSON.parse(localStorage.getItem("shoppingCart")));
-  //   }, 500);
-  // }, []);
-
-  // useEffect(() => {
-  //   setArrayLength(arrayFromStorage.length);
-  // }, [arrayFromStorage]);
+  useEffect(() => {
+    setArrayLength(arrayFromStorage.length);
+  }, [arrayFromStorage]);
 
   return (
     <header className="flex justify-between items-center bg-white shadow-md py-4 px-10">
@@ -73,14 +67,18 @@ function Header() {
       </nav>
 
       <NavLink to="/Cart" className="relative">
-        <img className="w-10 " src="/images/shoppingCart.png" alt="" />
-        {/* {arrayLength === 0 ? (
+        <img
+          className="w-10 "
+          src=".images/shoppingCart.png"
+          alt="Shopping Cart"
+        />
+        {arrayLength === 0 ? (
           ""
         ) : (
           <span className="absolute  top-0 -right-1 text-white bg-red-500 rounded-full w-5 h-5 flex justify-center items-center">
             {arrayLength}
           </span>
-        )} */}
+        )}
       </NavLink>
     </header>
   );

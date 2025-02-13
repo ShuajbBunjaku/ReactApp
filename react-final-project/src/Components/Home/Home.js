@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
+
 
 import Product from "../Products/Product";
 
@@ -8,38 +9,40 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
-  // const [localProducts, setLocalProducts] = useState(() => {
-  //   const storedData = localStorage.getItem("shoppingCart");
-  //   return storedData ? JSON.parse(storedData) : [];
-  // });
+  const [localProducts, setLocalProducts] = useState(
+    localStorage.getItem("shoppingCart")
+  );
 
   useEffect(() => {
-    fetch("/products-api/api/products.json")
+    fetch("api/products.json")
       .then((res) => res.json())
-      .then((json) => (setProducts(json), console.log(json)));
+      .then((json) => {
+        setProducts(json);
+        console.log(json);
+      });
   }, []);
 
   // useEffect(() => {
   //   localStorage.setItem("shoppingCart", JSON.stringify(localProducts));
   // }, [localProducts]);
 
-  // function addToLocal(product) {
-  //   setLocalProducts((prevProducts) => {
-  //     const exists = prevProducts.some((p) => p.title === product.title);
-  //     if (!exists) {
-  //       return [...prevProducts, product];
-  //     }
-  //     return prevProducts;
-  //   });
-  // }
+  function addToLocal(product) {
+    setLocalProducts((prevProducts) => {
+      const exists = prevProducts.some((p) => p.title === product.title);
+      if (!exists) {
+        return [...prevProducts, product];
+      }
+      return prevProducts;
+    });
+  }
 
   const filteredProducts = useMemo(() => {
     return products.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-  }, [currentPage, products, pageSize]);
+  }, [currentPage, products]);
 
   const numberOfPages = useMemo(() => {
     return Math.ceil(products.length / pageSize);
-  }, [products, pageSize]);
+  }, [products]);
 
   return (
     <div className="flex flex-col m-auto items-center gap-10 w-[1500px]">
@@ -51,9 +54,10 @@ function Home() {
             title={product.name}
             src={product.imageUrl}
             price={product.price}
-            // handleOnClick={() => addToLocal(product)}
+            handleOnClick={() => addToLocal(product)}
           />
         ))}
+        <Product></Product>
       </div>
       <div className="flex flex-row gap-[2rem] cursor-pointer">
         {new Array(numberOfPages).fill(null).map((_, i) => (
