@@ -2,7 +2,7 @@
   "name": "react-final-project",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ShuajbBunjaku.github.io/react-final-project",
+  "homepage": "https://ShuajbBunjaku.github.io/ReactApp",
   "dependencies": {
     "cra-template": "1.2.0",
     "react": "^19.0.0",
