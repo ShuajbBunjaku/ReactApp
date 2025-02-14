@@ -15,7 +15,7 @@ function Header() {
 
   return (
     <header className="flex justify-between items-center bg-white shadow-md py-4 px-10">
-      <img className="w-20" src="/image/logo.png" alt="Logo" />
+      <img className="w-20" src="/images/logo.png" alt="Logo" />
 
       <nav>
         <ul className="list-none flex gap-20">
