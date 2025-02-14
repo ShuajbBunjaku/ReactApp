@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { NavLink } from "react-router-dom";
 
-
 import Product from "../Products/Product";
 
 function Home() {
@@ -9,12 +8,10 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 6;
 
-  const [localProducts, setLocalProducts] = useState(
-    localStorage.getItem("shoppingCart")
-  );
+  const [localProducts, setLocalProducts] = useState([]);
 
   useEffect(() => {
-    fetch("api/products.json")
+    fetch("/ap/products.json")
       .then((res) => res.json())
       .then((json) => {
         setProducts(json);
@@ -22,18 +19,12 @@ function Home() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("shoppingCart", JSON.stringify(localProducts));
-  // }, [localProducts]);
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(localProducts));
+  }, [localProducts]);
 
   function addToLocal(product) {
-    setLocalProducts((prevProducts) => {
-      const exists = prevProducts.some((p) => p.title === product.title);
-      if (!exists) {
-        return [...prevProducts, product];
-      }
-      return prevProducts;
-    });
+    setLocalProducts((products) => [...products, product]);
   }
 
   const filteredProducts = useMemo(() => {
@@ -52,12 +43,11 @@ function Home() {
           <Product
             key={product.id}
             title={product.name}
-            src={product.imageUrl}
+            src={product.image}
             price={product.price}
             handleOnClick={() => addToLocal(product)}
           />
         ))}
-        <Product></Product>
       </div>
       <div className="flex flex-row gap-[2rem] cursor-pointer">
         {new Array(numberOfPages).fill(null).map((_, i) => (

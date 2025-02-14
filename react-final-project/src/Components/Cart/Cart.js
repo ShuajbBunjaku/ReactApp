@@ -9,7 +9,7 @@ function Cart() {
       const shoppingCart = localStorage.getItem("shoppingCart");
       const parsedProducts = shoppingCart ? JSON.parse(shoppingCart) : [];
 
-      if (!Array.isArray(parsedProducts)) return; 
+      if (!Array.isArray(parsedProducts)) return;
 
       setProducts(parsedProducts);
 
@@ -20,7 +20,7 @@ function Cart() {
       setTotal(calculatedTotal);
     }
 
-    updateCart(); 
+    updateCart();
 
     window.addEventListener("storage", updateCart);
     return () => window.removeEventListener("storage", updateCart);

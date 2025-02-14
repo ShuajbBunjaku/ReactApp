@@ -2,7 +2,7 @@ function Porduct({ handleOnClick, src, title, desc, price, cart }) {
   return (
     <div>
       <div className="flex flex-col items-center shadow-md w-[350px] p-[2rem] border-2 border-sky-500">
-        <img className="w-48 w-[300px] h-[200px]" src={`/images/${src}`} alt={title}></img>
+        <img className="w-48 w-[300px] h-[200px]" src={src} alt={title}></img>
         <div className="flex flex-col h-[232px]  justify-between text-center">
           <h2 className="text-2xl">{title}</h2>
           <p className="w-[250px] ">{desc}</p>
