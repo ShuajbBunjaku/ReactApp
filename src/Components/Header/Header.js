@@ -1,33 +1,40 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom"; // Fix import
 
 function Header() {
   const [arrayLength, setArrayLength] = useState(0);
-  const [arrayFromStorage, setArrayFromStorage] = useState([]);
 
   useEffect(() => {
-    let storedArray;
-    setInterval(() => {
-      storedArray = JSON.parse(localStorage.getItem("shoppingCart"));
+    function updateCart() {
+      const storedArray =
+        JSON.parse(localStorage.getItem("shoppingCart")) || [];
       setArrayLength(storedArray.length);
+    }
+
+ 
+
+    updateCart();
+
+    const interval = setInterval(() => {
+      updateCart();
     }, 100);
 
-    setArrayFromStorage(storedArray);
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <header className="flex justify-between items-center border-white border  shadow-md m-10 p-3 px-10 rounded-3xl">
+    <header className="flex justify-between items-center border-white border flex-wrap shadow-md m-5 p-4 px-6 rounded-3xl gap-4 max-sm:flex-col max-sm:items-center max-sm:text-center">
       <NavLink to="/home">
-        <h1>Shuajb</h1>
+        <h1 className="text-xl font-semibold">Shuajb</h1>
       </NavLink>
 
-      <nav>
-        <ul className="list-none flex gap-20">
+      <nav className="max-sm:w-full">
+        <ul className="list-none flex gap-10 max-sm:gap-6 max-sm:flex-wrap max-sm:justify-center">
           <li>
             <NavLink
               to="/home"
               className={({ isActive }) =>
-                `p-2  ${isActive ? "underline" : ""}`
+                `p-2 text-lg ${isActive ? "underline" : ""}`
               }
             >
               Home
@@ -37,7 +44,7 @@ function Header() {
             <NavLink
               to="/login"
               className={({ isActive }) =>
-                `p-2  ${isActive ? "underline" : ""}`
+                `p-2 text-lg ${isActive ? "underline" : ""}`
               }
             >
               Log In
@@ -46,16 +53,14 @@ function Header() {
         </ul>
       </nav>
 
-      <NavLink to="/Cart" className="relative">
+      <NavLink to="/Cart" className="relative flex items-center">
         <img
-          className="w-10 text"
+          className="w-10 max-sm:w-8"
           src="/ReactApp/images/cart.png"
           alt="Shopping Cart"
         />
-        {arrayLength === 0 ? (
-          ""
-        ) : (
-          <span className="absolute  top-0 -right-1  text-white bg-red-500 rounded-full w-5 h-5 flex justify-center items-center">
+        {arrayLength !== 0 && (
+          <span className="absolute top-0 -right-2 text-white bg-red-500 rounded-full w-5 h-5 text-xs flex justify-center items-center max-sm:w-4 max-sm:h-4">
             {arrayLength}
           </span>
         )}

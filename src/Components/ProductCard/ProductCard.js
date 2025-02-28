@@ -37,16 +37,16 @@ function ProductCard() {
   }, [id]);
 
   return (
-    <div className="flex justify-center items-center h-[50vh] ">
-      <div className=" flex p-[1rem] gap-[2rem]  h-fit">
-        <div className="bg-white rounded-xl">
+    <div className="flex justify-center items-center h-[70vh] max-sm:h-fit max-lg:h-fit">
+      <div className=" flex p-[1rem] gap-[2rem]  flex-row h-fit max-sm:flex-col max-lg:flex-col">
+        <div className="bg-white rounded-xl flex justify-center items-center">
           <img
             src={`/ReactApp/images/${product.imageUrl}`}
             alt={product.name}
-            className="w-[25vw] h-[30vh] object-contain"
+            className="w-[35vw] h-[40vh] max-sm:w-fit max-lg:w-fit object-contain"
           />
         </div>
-        <div className="flex items-start py-[3rem] w-[25vw] gap-[1rem] flex-col bg-black text-white">
+        <div className="flex items-start py-[3rem] w-[25vw] h-[40vh] max-sm:w-fit max-sm:items-center max-lg:w-fit max-lg:items-center  gap-[1rem] flex-col justify-center bg-black text-white">
           <p>Price: ${product.price}</p>
           <p>{product.description}</p>
           <button

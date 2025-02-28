@@ -43,7 +43,7 @@ function Cart() {
         <div className="flex justify-center flex-col items-center gap-5 ">
           {products.map((product) => (
             <div
-              className="text-white flex items-center justify-between p-[1rem] border border-white w-[80vw]"
+              className="text-white flex flex-row max-sm:flex-col items-center justify-between p-[1rem] border border-white w-[80vw]"
               key={product.id}
             >
               <img
@@ -68,7 +68,7 @@ function Cart() {
       {products.length !== 0 ? (
         <>
           <hr className="w-[80vw]" />
-          <div className="w-[80vw] flex justify-end gap-[2rem]">
+          <div className="w-[80vw] flex justify-end gap-[2rem] flex-row max-sm:flex-col max-sm:items-center ">
             <h1 className="text-3xl text-[#855DFF]">{Math.ceil(total)}$</h1>
             <button
               className="px-20 py-3 border border-white text-[#855DFF] cursor-pointer"

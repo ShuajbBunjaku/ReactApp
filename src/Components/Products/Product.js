@@ -19,9 +19,9 @@ function Product({
           alt={title}
         ></img>
         <div className="flex flex-col h-[100px]  justify-between text-center">
-          <h2 className="text-2xl text-black">{title}</h2>
-          <p className="w-[250px] ">{desc}</p>
           <p className="text-2xl text-black flex justify-center ">{price}$</p>
+          <h2 className="text-2xl text-black">{title}</h2>
+          
         </div>
       </div>
     </div>

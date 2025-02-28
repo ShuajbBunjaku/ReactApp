@@ -57,17 +57,21 @@ function Home() {
   }, [filteredProducts]);
 
   return (
-    <div className="flex flex-col m-auto items-center gap-10 w-[1500px] my-0">
-      <section className="flex flex-col gap-[0.5rem] items-center ">
-        <h1 className="text-2xl"> All Products</h1>
-        This is your category description. It’s a great place to tell customers
-        what this category is about.
+    <div className="flex flex-col m-auto items-center gap-10 w-[78vw] my-0">
+      <section className="flex flex-col gap-2 items-center text-center">
+        <h1 className="text-2xl font-semibold">All Products</h1>
+        <p className="text-gray-600">
+          This is your category description. It’s a great place to tell
+          customers what this category is about.
+        </p>
       </section>
 
-      <div className=" flex space-between      flex-wrap ">
+      <div className="flex flex-wrap justify-center gap-3 w-full">
         <p
-          className={`cursor-pointer width-fit p-2 border rounded-xl mx-5 my-2 ${
-            selectedCategory === 0 && "text-[#855DFF]"
+          className={`cursor-pointer px-4 py-2 border rounded-xl  my-2  ${
+            selectedCategory === 0
+              ? "text-[#855DFF] border-[#855DFF]"
+              : "border-gray-300"
           }`}
           onClick={() => {
             setTimeout(() => {
@@ -79,8 +83,10 @@ function Home() {
         </p>
         {productsCategory.map((p) => (
           <p
-            className={`cursor-pointer width-fit p-2 border rounded-xl mx-5  my-2 ${
-              selectedCategory === p.id && "text-[#855DFF]"
+            className={`cursor-pointer px-4 py-2 border rounded-xl  my-2 ${
+              selectedCategory === p.id
+                ? "text-[#855DFF] border-[#855DFF]"
+                : "border-gray-300"
             }`}
             key={p.id}
             onClick={() => {
@@ -93,7 +99,7 @@ function Home() {
           </p>
         ))}
       </div>
-      <div className="grid w-full gap-5  grid-cols-3 ">
+      <div className="grid w-full gap-4 grid-cols-3 max-sm:grid-cols-1 max-xl:grid-cols-2 max-lg:grid-cols-2 max-lg:grid-cols-3">
         {paginatedFilteredProducts.map((product) => (
           <Product
             key={product.id}
@@ -107,20 +113,20 @@ function Home() {
         ))}
       </div>
       {numberOfPages > 1 ? (
-        <div className="flex flex-row gap-[2rem]  cursor-pointer">
+        <div className="flex flex-row gap-[0.5rem] flex-wrap  ">
           <p
             onClick={() => {
               if (currentPage > 1) {
                 setCurrentPage((currentPage) => currentPage - 1);
               }
             }}
-            className="px-5 py-3 border rounded-md"
+            className="px-5 py-3 border rounded-md cursor-pointer"
           >
             Previous
           </p>
           {new Array(numberOfPages).fill(null).map((_, i) => (
             <NavLink
-              className={`px-5 py-3 border rounded-md ${
+              className={`px-5 py-3 border rounded-md cursor-pointer ${
                 currentPage === i + 1 && "text-[#855DFF]"
               }`}
               key={i}
